@@ -8,6 +8,7 @@ import { Button, Heading, MultiStep, Text, TextInput } from "@ignite-ui/react";
 import { Container, Form, FormError, Header } from "./style";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { api } from "@/src/lib/axios";
 
 const registerFormSchema = z.object({
   username: z
@@ -43,7 +44,14 @@ const Register = () => {
   }, [router.query?.username, setValue]);
 
   async function handleRegister(data: RegisterFormData) {
-    console.log(data);
+    try {
+      await api.post("/users", {
+        name: data.name,
+        username: data.username,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
