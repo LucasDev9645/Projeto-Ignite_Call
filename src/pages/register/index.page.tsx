@@ -49,6 +49,8 @@ const Register = () => {
         name: data.name,
         username: data.username,
       });
+
+      await router.push("/register/connect-calendar");
     } catch (err) {
       console.log(err);
     }
@@ -83,7 +85,7 @@ const Register = () => {
             <FormError size="sm">{errors.name.message}</FormError>
           )}
         </label>
-        <Button typr="submit">
+        <Button type="submit" disabled={isSubmitting}>
           Próximo Passo <ArrowRight />
         </Button>
       </Form>
